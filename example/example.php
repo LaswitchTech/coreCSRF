@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Import additionnal class into the global namespace
 use LaswitchTech\coreCSRF\CSRF;
@@ -16,8 +17,8 @@ $CSRF->config('field', 'csrf_token');
 $token = $CSRF->token();
 
 // Verify CSRF Token
-if($CSRF->verify($token)){
-    echo 'CSRF Token is valid';
+if($CSRF->validate($token)){
+    echo 'CSRF Token is valid' . PHP_EOL;
 } else {
-    echo 'CSRF Token is invalid';
+    echo 'CSRF Token is invalid' . PHP_EOL;
 }
