@@ -19,7 +19,6 @@ class CSRF {
 
     // Logger
     private $Logger;
-    private $Level = 1;
 
     // Configurator
     private $Configurator = null;
@@ -35,9 +34,6 @@ class CSRF {
 
         // Initialize Configurator
         $this->Configurator = new Configurator('csrf');
-
-        // Retrieve Log Level
-        $this->Level = $this->Configurator->get('logger', 'level') ?: $this->Level;
 
         // Retrieve CSRF Settings
         $this->field = $this->Configurator->get('csrf', 'field') ?: $this->field;
