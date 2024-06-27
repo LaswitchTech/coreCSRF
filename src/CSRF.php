@@ -19,7 +19,6 @@ class CSRF {
 
     // Logger
     private $Logger;
-    private $Level = 1;
 
     // Configurator
     private $Configurator = null;
@@ -35,9 +34,6 @@ class CSRF {
 
         // Initialize Configurator
         $this->Configurator = new Configurator('csrf');
-
-        // Retrieve Log Level
-        $this->Level = $this->Configurator->get('logger', 'level') ?: $this->Level;
 
         // Retrieve CSRF Settings
         $this->field = $this->Configurator->get('csrf', 'field') ?: $this->field;
@@ -179,8 +175,11 @@ class CSRF {
         $reflector = new ReflectionClass($this);
         $path = $reflector->getFileName();
 
+        // Retrieve the filename of this class
+        $filename = basename($path);
+
         // Modify the path to point to the config directory
-        $path = str_replace('src/Logger.php', 'config/', $path);
+        $path = str_replace('src/' . $filename, 'config/', $path);
 
         // Add the requirements to the Configurator
         $this->Configurator->add('requirements', $path . 'requirements.cfg');
